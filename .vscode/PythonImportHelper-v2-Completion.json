@@ -1,0 +1,191 @@
+[
+    {
+        "label": "web",
+        "importPath": "aiohttp",
+        "description": "aiohttp",
+        "isExtraImport": true,
+        "detail": "aiohttp",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask.helpers",
+        "description": "flask.helpers",
+        "isExtraImport": true,
+        "detail": "flask.helpers",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "active_user",
+        "kind": 5,
+        "importPath": "Api_asyncio.py",
+        "description": "Api_asyncio.py",
+        "peekOfCode": "active_user = 0\nasync def handle(request):\n    response_obj = {\n        'numActiveUsers': active_user\n    }\n    return web.Response(text=json.dumps(response_obj))\nasync def new_user_inc(request):\n    try:\n        global active_user  # to track changes done by user\n        # print(request.json())",
+        "detail": "Api_asyncio.py",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Api_asyncio.py",
+        "description": "Api_asyncio.py",
+        "peekOfCode": "app = web.Application()\n# get request to get present count of user\napp.router.add_get('/getActiveUsers', handle)\n# post request to increment user count\napp.router.add_post('/incActiveUsers', new_user_inc)\n# post request to decrement user count\napp.router.add_post('/decActiveUsers', new_user_dec)\nweb.run_app(app)",
+        "detail": "Api_asyncio.py",
+        "documentation": {}
+    },
+    {
+        "label": "profile",
+        "kind": 6,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "class profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)\n@app.route('/')\ndef home():\n    return render_template('home.html')\n@app.route('/register', methods=['GET', 'POST'])\ndef register():",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "def home():\n    return render_template('home.html')\n@app.route('/register', methods=['GET', 'POST'])\ndef register():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        s = profile(username=username, password=password)\n        db.session.add(s)\n        db.session.commit()",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "register",
+        "kind": 2,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "def register():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        s = profile(username=username, password=password)\n        db.session.add(s)\n        db.session.commit()\n        return redirect(url_for('login'))\n    else:\n        return render_template('register.html')",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        if username == 'admin' and password == 'admin':\n            return redirect(url_for('func_name'))\n    else:\n        return render_template('index.html')\n@ app.route('/success')\ndef func_name():",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "func_name",
+        "kind": 2,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "def func_name():\n    flash('login succesful')  # flash msg\n    return render_template('success.html')\nif __name__ == '__main__':\n    db.create_all()\n    app.run(host='127.0.0.1', port=8000, debug=True)",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "app = Flask(__name__)\napp.secret_key = 'aaa'\ndb = SQLAlchemy(app=app)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost:3306/allinone'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\nclass profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "app.secret_key = 'aaa'\ndb = SQLAlchemy(app=app)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost:3306/allinone'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\nclass profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)\n@app.route('/')",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "db = SQLAlchemy(app=app)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost:3306/allinone'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\nclass profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)\n@app.route('/')\ndef home():",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
+        "kind": 5,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost:3306/allinone'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\nclass profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)\n@app.route('/')\ndef home():\n    return render_template('home.html')",
+        "detail": "dummy",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS']",
+        "kind": 5,
+        "importPath": "dummy",
+        "description": "dummy",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\nclass profile(db.Model):\n    username = db.Column(db.String(100), primary_key=True)\n    password = db.Column(db.String(100))\n    def __str__(self):\n        return \"name={}\".format(self.ename)\n@app.route('/')\ndef home():\n    return render_template('home.html')\n@app.route('/register', methods=['GET', 'POST'])",
+        "detail": "dummy",
+        "documentation": {}
+    }
+]
